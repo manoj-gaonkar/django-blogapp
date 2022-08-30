@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+<!--crispy form tags usage mentioned in https://django-crispy-forms.github.io/crispy-tailwind/index.html -->
+{% load crispy_forms_tags %}
+<!--loadign tailwind filters for form|crispy details of this in https://django-crispy-forms.github.io/crispy-tailwind/index.html-->
+{% load tailwind_filters %}
+<!--block strats herf-->
+{% block content %}
+
+<div class="h-screen w-full flex justify-center items-center overflow-hidden">
+  <div class="px-10 py-3 bg-white w-1/3 shadow-2xl shadow-gray-300 rounded-md">
+    <h1
+      class="uppercase font-bold text-4xl text-center my-4 text-gray-700 tracking-wider select-none"
+    >
+      Sign Up
+    </h1>
+    <form action="#" method="POST">
+      {% csrf_token %}
+      <fieldset>
+        <legend class="border-b border-gray-400 w-ful h-4"></legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="flex justify-between items-center">
+        <button
+          type="submit"
+          class="rounded my-4 px-3 py-2 bg-gray-500 uppercase text-white"
+        >
+          Sign up
+        </button>
+        <div>
+          <small class=" ">
+            Already signed up <a href="{% url 'login' %}" class="text-blue-500"> Login</a>
+          </small>
+        </div> 
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+<!--content block start-->
+{% block content %}
+
+<div class="px-6 py-2 bg-white mb-4 border rounded shadow-sm mt-6" id="post">
+  <div class= "flex justify-center pt-4">
+    <img
+      src=" {{ object.author.profile.image.url }} "
+      alt=""
+      class="w-20 h-20 block rounded-full object-cover "
+    />
+  </div>
+  <a href="{% url 'user-posts' object.author.username %}" class="font-bold text-red-600 text-sm block text-center">
+    {{ object.author }}
+  </a>
+  <h1 class="font-bold text-4xl text-center">{{ object.title }}</h1>
+  <!--<img src="https://img.freepik.com/premium-vector/abstract-minimal-geometric-black-memphis-background_131186-741.jpg?size=626&ext=jpg"  class="w-full h-full  object-cover" alt=""> -->
+  <h3 class="text-center p-10 bg-gray-200 my-4">{{ object.content }}</h3>
+  <h2 class="text-center text-xs pb-4">{{ object.date_posted|date:"F d, Y" }}</h2>
+
+  
+</div>
+<div class="text-center h-48 flex justify-center items-center">
+  <a href=" {% url 'blog-home' %} ">
+    <button class="py-2 px-4 rounded-full  border-2 border-gray-300 hover:bg-gray-300 transition-all hover:scale-[1.4] "> < </button>
+    </a>
+</div>
+
+{% endblock %}

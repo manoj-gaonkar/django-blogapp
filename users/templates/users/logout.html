@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<h1 class='border-2 px-2 py-1 border-red-300 text-gray-700 text-sm rounded bg-red-200'>You have been Logged out</h1>
+<span class="lowercase">Log in again   </span><a href=" {% url 'login' %} " class='text-blue-600 '>Login</a>
+{% endblock content %}

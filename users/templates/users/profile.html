@@ -1,0 +1,80 @@
+{% extends 'blog/base.html' %}
+
+{% load crispy_forms_tags %}
+<!--loadign tailwind filters for form|crispy details of this in https://django-crispy-forms.github.io/crispy-tailwind/index.html-->
+{% load tailwind_filters %}
+
+<!--block start-->
+{% block content %}
+
+<div
+  class="bg-[{{ color }}] rounded w-[100%] mt-6 inline-flex flex-col justify-center items-center md:justify-start md:items-start md:flex-row p-6"
+>
+
+  <div class="inline">
+    <img
+      class="object-cover h-40 w-40 rounded-lg"
+      src=" {{ user.profile.image.url }} "
+      alt=""
+    />
+  </div>
+  <div class="pl-8 pt-3">
+    <p class="font-bold text-3xl">{{ user.username }}</p>
+    <p class="">{{ user.email }}</p>
+  </div>
+</div>
+
+<!--Username and profile updation form-->
+<div class="grid grid-cols-3 gap-4 mt-[4rem]">
+  <div class="col-span-2">
+    
+    {% for post in posts%}
+
+    <div class="px-3 py-2 bg-white mb-4 border rounded shadow-sm" id="post" >
+      <img
+        src=" {{ post.author.profile.image.url }} "
+        alt=""
+        class="w-10 h-10 inline rounded-full object-cover"
+      />
+      <p class="font-bold text-red-600 text-xl inline">{{ post.author }} </p>
+      <h1 class="font-bold text-2xl">
+        <a href=" {% url 'post-detail' post.id %} "> {{ post.title }} </a>
+      </h1>
+      <p class="h-5 overflow-hidden">{{ post.content }}...</p>
+      <h2 class="mb-2">{{ post.date_posted|date:"F d, Y" }}</h2>
+      <div class= "mt-3">
+        <a href="{% url 'post-update' post.id %}" class="px-3 py-2   bg-green-300 uppercase text-sm rounded">Update</a>
+        <a href="{% url 'post-delete' post.id %}" class="px-3 py-2   bg-red-400 uppercase text-sm rounded">Delete</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+<div class="px-10 py-3 w-full shadow-2xl shadow-gray-200 rounded-md  bg-gray-300 grid-cols-1 h-fit">
+    <h1
+      class="uppercase font-bold text-4xl text-center my-4 text-gray-700 tracking-wider select-none"
+    >
+     Update 
+    </h1>
+
+<form action="#" method="POST" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <fieldset>
+    <legend class="border-b border-gray-400 w-ful h-4"></legend>
+    {{ u_form|crispy }}
+    {{ p_form|crispy }}
+
+  </fieldset>
+  <div class="flex justify-between items-center">
+    <button
+      type="submit"
+      class="rounded my-4 px-3 py-2 bg-gray-500 uppercase text-white"
+    >
+      Update
+    </button>
+  </div>
+</form>
+
+</div>
+</div>
+
+{% endblock content %}
