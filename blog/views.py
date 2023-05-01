@@ -20,8 +20,8 @@ def home(request):
 # class based views listview
 class PostListView(ListView):
     model = Post
-    template_name = "blog/home.html"  #default route for class based views <appname>/<model>_<viewtype> changed using template_name
     context_object_name = 'posts'
+    template_name = 'blog/home.html'  #default route for class based views <appname>/<model>_<viewtype> changed using template_name
     ordering = ['-date_posted']
     paginate_by = 5
 
